@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: cookbook
+
+test:
+  adapter: postgresql
+  database: cookbook_test
