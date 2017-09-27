@@ -13,7 +13,7 @@
               <tr>
                 <th>Recipe</th>
                 <th>Recipe Rating</th>
-                <th></th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                   <td class="align-middle"><%= recipe.rating %></td>
                   <td style="text-align: center;">
                     <a href="/results/<%= recipe.id %>">
-                      <button class="btn btn-warning btn-block" type="button">Edit Recipe</button>
+                      <button class="btn btn-info btn-block" type="button">Edit Recipe</button>
                     </a>
                   </td>
                 </tr>
@@ -37,31 +37,97 @@
 </div><br><br>
 <!-- End Table -->
 
-<!-- Add New Recipe -->
 <div class="row">
-  <div class="col">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h1>Create a new recipe</h1>
-        <form action="/create_recipe" method="post">
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="form-group">
-                <label for="name">Recipe Name: </label>
-                <input id="name" name="name" class="form-control" type="text" required>
+  <div class="col-sm-6">
+
+    <!-- Add New Recipe -->
+    <div class="row">
+      <div class="col">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h1>Create a new recipe</h1>
+            <form action="/create_recipe" method="post">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <label for="name">Recipe Name: </label>
+                    <input id="name" name="name" class="form-control" type="text" required>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label for="rating">Recipe Rating (1 - 5): </label>
+                    <input id="rating" name="rating" class="form-control" type="number" min="1" max="5">
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="rating">Recipe Rating (1 - 10): </label>
-                <input id="rating" name="rating" class="form-control" type="number" min="1" max="10">
-              </div>
-            </div>
+              <button type="submit" class="btn btn-info">Create Recipe</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-warning">Create Recipe</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- End Add Recipe -->
+    <!-- End Add Recipe -->
+
+  <div class="col-sm-6">
+
+    <!-- Add New Category -->
+    <div class="row">
+      <div class="col">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h1>Create a new category</h1>
+            <form action="/create_category" method="post">
+              <div class="row">
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label for="tag">Category Tag: </label>
+                    <input id="tag" name="tag" class="form-control" type="text" required>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success">Create Category</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Add Category -->
+
+  </div>
+</div><br><br>
+
+<!-- Category Table -->
+<div class="row">
+  <div class="col">
+    <% if @categories.any? %>
+      <div class="card bg-light">
+        <div class="card-body">
+          <!-- Hover Effect Table -->
+          <table class="table table-hover table-bordered">
+            <thead class="thead text-white bg-dark">
+              <tr>
+                <th>Category</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each do |category| %>
+                <tr class="table-light">
+                  <td class="align-middle"><%= category.tag %></td>
+                  <td style="text-align: center;">
+                    <a href="/results/<%= category.id %>">
+                      <button class="btn btn-success btn-block" type="button">View Recipes in this Tag</button>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div><br><br>
+<!-- End Category Table -->
