@@ -3,6 +3,7 @@ Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
+#Index Routes, dont change
 get('/') do
   @recipes = Recipe.all()
   @categories = Category.all()
@@ -37,3 +38,15 @@ post('/create_category') do
   @recipes = Recipe.all()
   erb(:index)
 end
+#End Index Routes
+
+get('/recipe/:id') do
+  @recipe = Recipe.find(params[:id])
+  erb(:recipe_info)
+end
+
+# post('/add_ingredient/:id') do
+#   ing_name = params['ingredient']
+#   Ingredient.new({:ingredient => ing_name, :ingredient_id => [@recipe.id]})
+#   erb(:recipe_info)
+# end

@@ -22,7 +22,7 @@
                   <td class="align-middle"><%= recipe.name %></td>
                   <td class="align-middle"><%= recipe.rating %></td>
                   <td style="text-align: center;">
-                    <a href="/results/<%= recipe.id %>">
+                    <a href="/recipe/<%= recipe.id %>">
                       <button class="btn btn-info btn-block" type="button">Edit Recipe</button>
                     </a>
                   </td>
@@ -117,7 +117,7 @@
                 <tr class="table-light">
                   <td class="align-middle"><%= category.tag %></td>
                   <td style="text-align: center;">
-                    <a href="/results/<%= category.id %>">
+                    <a href="/category/<%= category.id %>">
                       <button class="btn btn-success btn-block" type="button">View Recipes in this Tag</button>
                     </a>
                   </td>

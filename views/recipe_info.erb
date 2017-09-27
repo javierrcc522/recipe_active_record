@@ -1,3 +1,25 @@
 <div class="jumbotron">
-  <h1></h1>
+  <h1> <%= @recipe.name() %> </h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h1>Add an ingredient to this recipe:</h1>
+        <form action="/add_ingredient/<%= @recipe.id %>" method="post">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="form-group">
+                <label for="ingredient">Ingredient:</label>
+                <input id="ingredient" name="ingredient" class="form-control" type="text" required>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-warning">Add Ingredient</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
