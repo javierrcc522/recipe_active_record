@@ -110,17 +110,19 @@ patch("/recipe/:id") do
   #renaming recipe
   @recipe.update({:name => rename})
   @recipe = Recipe.all()
-  redirect "/"
+  redirect '/'
 end
 
 #End Recipe Info
 
 get('/category/:id') do
   @category = Category.find(params[:id])
+  @recipe = Recipe.all()
   erb(:category_info)
 end
 
 get('/ingredient/:id') do
+  @recipe = Recipe.all()
   @ingredient = Ingredient.find(params[:id])
   erb(:ingredient_info)
 end

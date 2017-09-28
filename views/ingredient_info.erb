@@ -1,3 +1,17 @@
 <div class="jumbotron">
   <h1> <%= @ingredient.ingredient() %> </h1>
 </div>
+
+<% if @ingredient.recipes().any?() %>
+
+  <h3>Here are all the recipes using this ingredient:</h3>
+
+  <ul>
+    <% @ingredient.recipes().each() do |add| %>
+      <li><a href="/recipe/<%= add.id %>"><%= add.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no recipes yet!</p>
+<% end %>
+</div>
