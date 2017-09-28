@@ -2,24 +2,35 @@
   <h1> <%= @recipe.name() %> </h1>
 </div>
 
-<div class="row">
-  <div class="col">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h1>Add an ingredient to this recipe:</h1>
-        <form action="/add_ingredient/<%= @recipe.id %>" method="post">
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="form-group">
-                <label for="ingredient">Ingredient:</label>
-                <input id="ingredient" name="ingredient" class="form-control" type="text" required>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-warning">Add Ingredient</button>
-        </form>
+
+<h1>Available ingredients:</h1>
+
+<% if @ingredients.any?() %>
+  <form action="/add_ing/<%= @recipe.id %>" method="post">
+    <% @unused_ingredients.each() do |ingredient| %>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="ingredient_ids[]" value="<%= ingredient.id() %>"><%= ingredient.ingredient() %>
+        </label>
       </div>
-    </div>
-  </div>
-</div>
-</div>
+    <% end %>
+
+    <button type="submit">Add ingredient</button>
+  </form>
+<% end %><br><br>
+
+<% if @recipe.ingredients().any?() %>
+
+  <h3>Here are all the ingredients in this recipe:</h3>
+
+  <ul>
+    <% @recipe.ingredients().each() do |add| %>
+      <li><%= add.ingredient() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no ingredients yet!</p>
+<% end %>
+
+<a href='/'><button type="button" class ="btn btn-info">Return to Cook Book</button></a>
