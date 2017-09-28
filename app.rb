@@ -68,8 +68,10 @@ end
 get('/recipe/:id') do
   @recipe = Recipe.find(params[:id])
   @ingredients = Ingredient.all
+  @categories = Category.all()
   # Returns the ARRAY where the the elements of ALL ingredients are not that of the elements of a RECIPE'S INGREDIENTS
   @unused_ingredients = @ingredients - @recipe.ingredients
+  @unused_categories = @categories - @recipe.categories
   erb(:recipe_info)
 end
 
@@ -79,6 +81,16 @@ post('/add_ing/:id') do
   ingredient_ids = params['ingredient_ids']
   ingredient_ids.each do |ingredient_id|
     recipe.ingredients.push(Ingredient.find(ingredient_id))
+  end
+  redirect "/recipe/#{recipe.id}"
+end
+
+post('/add_cat/:id') do
+  recipe = Recipe.find(params[:id])
+  categories = Category.all
+  category_ids = params['category_ids']
+  category_ids.each do |category_id|
+    recipe.categories.push(Category.find(category_id))
   end
   redirect "/recipe/#{recipe.id}"
 end
