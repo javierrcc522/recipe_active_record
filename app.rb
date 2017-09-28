@@ -79,6 +79,7 @@ post('/add_ing/:id') do
   recipe = Recipe.find(params[:id])
   ingredients = Ingredient.all
   ingredient_ids = params['ingredient_ids']
+  #joining ingredients and recipes
   ingredient_ids.each do |ingredient_id|
     recipe.ingredients.push(Ingredient.find(ingredient_id))
   end
@@ -89,11 +90,29 @@ post('/add_cat/:id') do
   recipe = Recipe.find(params[:id])
   categories = Category.all
   category_ids = params['category_ids']
+  #joining ingredients and categories
   category_ids.each do |category_id|
     recipe.categories.push(Category.find(category_id))
   end
   redirect "/recipe/#{recipe.id}"
 end
+
+delete("/recipe/:id") do
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  @recipe.delete
+  @recipes = Recipe.all()
+  redirect "/"
+end
+
+patch("/recipe/:id") do
+  rename = params.fetch('rename')
+  @recipe = Recipe.find(params.fetch("id").to_i())
+  #renaming recipe
+  @recipe.update({:name => rename})
+  @recipe = Recipe.all()
+  redirect "/"
+end
+
 #End Recipe Info
 
 get('/category/:id') do

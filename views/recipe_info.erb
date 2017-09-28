@@ -2,8 +2,33 @@
   <h1> <%= @recipe.name() %> </h1>
 </div>
 
-<div class="row">
 
+<div class="row">
+  <div class="col-sm-2">
+    <a href='/'><button type="button" class ="btn btn-primary">Return to Cook Book</button></a>
+  </div>
+
+  <div class="col-sm-2">
+    <form action="/recipe/<%= @recipe.id() %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class='btn btn-danger'>Delete Recipe</button>
+    </form>
+  </div>
+</div><br>
+
+<form action="/recipe/<%= @recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group row">
+    <div class="col-sm-1">
+      <button type="submit" class='btn btn-info'>Rename</button>
+    </div>
+    <div class="col-sm-3">
+      <input class="form-control form-control-lg" name="rename" id="lgFormGroupInput" placeholder="Update Recipe Name">
+    </div>
+  </div>
+</form>
+
+<div class="row">
   <!-- Joining Recipes and Ingredients -->
   <div class="col-sm-6">
     <h1>Available ingredients:</h1>
@@ -39,7 +64,7 @@
   <!-- End Recipe/Ingredient Join -->
 
   <!-- Joining Categories and Recipes -->
-  <div class="col-sm=6">
+  <div class="col-sm-6">
       <h1>Available Recipe Tags:</h1>
 
       <% if @categories.any?() %>
@@ -70,6 +95,5 @@
     </div>
   </div>
   <!-- End Category/Recipe Joing -->
-  
-  <a href='/'><button type="button" class ="btn btn-info">Return to Cook Book</button></a>
+
 </div>
