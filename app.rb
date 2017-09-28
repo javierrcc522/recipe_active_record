@@ -115,6 +115,7 @@ end
 
 #End Recipe Info
 
+#Join Table Views
 get('/category/:id') do
   @category = Category.find(params[:id])
   @recipe = Recipe.all()
